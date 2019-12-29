@@ -28,7 +28,6 @@ contract Title is ERC721Metadata {
     // --- Data ---
     uint public count;
     string public uri;
-    
 
 
     constructor (string memory name, string memory symbol) ERC721Metadata(name, symbol) public {
@@ -60,7 +59,7 @@ contract Title is ERC721Metadata {
         count += 1; // can't overflow, not enough gas in the world to pay for 2**256 nfts.
         return count-1;
     }
-} 
+}
 
 contract TitleLike {
     function ownerOf (uint) public returns (address);
