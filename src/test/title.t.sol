@@ -32,31 +32,28 @@ contract TitleUser {
 contract TitleTest is DSTest {
     function testSetupPrecondition() public {
         Title title_ = new Title("title", "TLO");
-        assertEq(title_.count(), 0);
+        assertEq(title_.count(), 1);
     }
 
     function testMint() public {
         Title title = new Title("title", "TLO");
-        TitleUser user = new TitleUser(title); 
+        TitleUser user = new TitleUser(title);
         title.rely(address(user));
-        assertEq(user.doIssue(address(this)), 0);
         assertEq(user.doIssue(address(this)), 1);
         assertEq(user.doIssue(address(this)), 2);
+        assertEq(user.doIssue(address(this)), 3);
     }
 }
 
 contract TitleOwnable is TitleOwned {
-
     constructor (address title_) TitleOwned (title_) public {
     }
 
     function testPermission(uint loan) owner(loan) public {
-
     }
 }
 
 contract TitleOwnedTest is DSTest {
-
     TitleOwnable test;
     Title title;
 

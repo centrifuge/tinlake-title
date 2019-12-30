@@ -32,7 +32,7 @@ contract Title is ERC721Metadata {
 
     constructor (string memory name, string memory symbol) ERC721Metadata(name, symbol) public {
         wards[msg.sender] = 1;
-        count = 0;
+        count = 1;
     }
 
     // --- Title ---
