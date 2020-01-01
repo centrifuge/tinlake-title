@@ -41,6 +41,10 @@ contract Title is ERC721Metadata {
         count += 1; // can't overflow, not enough gas in the world to pay for 2**256 nfts.
         return count-1;
     }
+
+    function close (uint tkn) public auth {
+        _burn(tkn);
+    }
 }
 
 contract TitleLike {

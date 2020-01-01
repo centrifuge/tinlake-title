@@ -35,13 +35,32 @@ contract TitleTest is DSTest {
         assertEq(title_.count(), 1);
     }
 
-    function testMint() public {
+    function testIssue() public {
         Title title = new Title("title", "TLO");
         TitleUser user = new TitleUser(title);
         title.rely(address(user));
         assertEq(user.doIssue(address(this)), 1);
         assertEq(user.doIssue(address(this)), 2);
         assertEq(user.doIssue(address(this)), 3);
+    }
+    function testClose() public {
+        Title title = new Title("title", "TLO");
+        TitleUser user = new TitleUser(title);
+        title.rely(address(user));
+        assertEq(user.doIssue(address(this)), 1);
+        assertEq(user.doIssue(address(this)), 2);
+        title.close(1);
+        title.close(2);
+        assertEq(user.doIssue(address(this)), 3);
+    }
+    function testFailClose() public {
+        Title title = new Title("title", "TLO");
+        TitleUser user = new TitleUser(title);
+        title.rely(address(user));
+        assertEq(user.doIssue(address(this)), 1);
+        assertEq(user.doIssue(address(this)), 2);
+        title.close(2);
+        title.ownerOf(2);
     }
 }
 
