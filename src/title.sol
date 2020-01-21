@@ -37,6 +37,10 @@ contract Title is ERC721Metadata {
 
     // --- Title ---
     function issue (address usr) public auth returns (uint) {
+        return _issue(usr);
+    }
+
+    function _issue (address usr) internal returns (uint) {
         _mint(usr, count);
         count += 1; // can't overflow, not enough gas in the world to pay for 2**256 nfts.
         return count-1;
