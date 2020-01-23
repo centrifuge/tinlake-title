@@ -14,21 +14,15 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-pragma solidity >=0.4.24;
+pragma solidity >=0.5.12;
 
 import { ERC721Metadata } from "./openzeppelin-solidity/token/ERC721/ERC721Metadata.sol";
+import { Auth } from "tinlake-auth/auth.sol";
 
-contract Title is ERC721Metadata {
-    // --- Auth ---
-    mapping (address => uint) public wards;
-    function rely(address usr) public auth { wards[usr] = 1; }
-    function deny(address usr) public auth { wards[usr] = 0; }
-    modifier auth { require(wards[msg.sender] == 1); _; }
-
+contract Title is Auth, ERC721Metadata {
     // --- Data ---
     uint public count;
     string public uri;
-
 
     constructor (string memory name, string memory symbol) ERC721Metadata(name, symbol) public {
         wards[msg.sender] = 1;
@@ -37,6 +31,10 @@ contract Title is ERC721Metadata {
 
     // --- Title ---
     function issue (address usr) public auth returns (uint) {
+        return _issue(usr);
+    }
+
+    function _issue (address usr) internal returns (uint) {
         _mint(usr, count);
         count += 1; // can't overflow, not enough gas in the world to pay for 2**256 nfts.
         return count-1;
