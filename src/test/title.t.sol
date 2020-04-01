@@ -30,6 +30,9 @@ contract TitleUser {
 }
 
 contract TitleTest is DSTest {
+
+    function setUp() public {}
+
     function testSetupPrecondition() public {
         Title title_ = new Title("title", "TLO");
         assertEq(title_.count(), 1);
