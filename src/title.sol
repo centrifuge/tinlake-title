@@ -16,15 +16,15 @@
 
 pragma solidity >=0.5.15;
 
-import { ERC721Metadata } from "./openzeppelin-solidity/token/ERC721/ERC721Metadata.sol";
+import { ERC721 } from "./openzeppelin-solidity/token/ERC721/ERC721.sol";
 import { Auth } from "tinlake-auth/auth.sol";
 
-contract Title is Auth, ERC721Metadata {
+contract Title is Auth, ERC721 {
     // --- Data ---
     uint public count;
     string public uri;
 
-    constructor (string memory name, string memory symbol) ERC721Metadata(name, symbol) public {
+    constructor (string memory name, string memory symbol) ERC721(name, symbol) public {
         wards[msg.sender] = 1;
         count = 1;
     }
@@ -45,8 +45,8 @@ contract Title is Auth, ERC721Metadata {
     }
 }
 
-contract TitleLike {
-    function ownerOf (uint) public returns (address);
+interface TitleLike {
+    function ownerOf (uint) external returns (address);
 }
 
 contract TitleOwned {
