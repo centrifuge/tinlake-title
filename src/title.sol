@@ -33,7 +33,7 @@ contract Title is Auth, ERC721 {
 interface TitleLike {
     function issue(address) external returns (uint);
     function close(uint) external;
-    function ownerOf (uint) external returns (address);
+    function ownerOf (uint) external view returns (address);
 }
 
 contract TitleOwned {
