@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-pragma solidity >=0.5.15;
+pragma solidity ^0.7.0;
 
 import "ds-test/test.sol";
 
@@ -7,7 +7,7 @@ import "../title.sol";
 
 contract TitleUser {
    Title title;
-   constructor (Title title_) public {
+   constructor (Title title_) {
     title = title_;
    }
    function doIssue(address usr) public returns (uint) {
@@ -54,7 +54,7 @@ contract TitleTest is DSTest {
 }
 
 contract TitleOwnable is TitleOwned {
-    constructor (address title_) TitleOwned (title_) public {
+    constructor (address title_) TitleOwned (title_) {
     }
 
     function testPermission(uint loan) owner(loan) public {

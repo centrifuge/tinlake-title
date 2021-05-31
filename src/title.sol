@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-pragma solidity >=0.5.15;
+pragma solidity ^0.7.0;
 
 import { ERC721 } from "./openzeppelin-solidity/token/ERC721/ERC721.sol";
 import { Auth } from "tinlake-auth/auth.sol";
@@ -9,7 +9,7 @@ contract Title is Auth, ERC721 {
     uint public count;
     string public uri;
 
-    constructor (string memory name, string memory symbol) ERC721(name, symbol) public {
+    constructor (string memory name, string memory symbol) ERC721(name, symbol) {
         wards[msg.sender] = 1;
         count = 1;
     }
@@ -38,7 +38,7 @@ interface TitleLike {
 
 contract TitleOwned {
     TitleLike title;
-    constructor (address title_) public {
+    constructor (address title_) {
         title = TitleLike(title_);
     }
 
