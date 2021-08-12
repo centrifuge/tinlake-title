@@ -11,7 +11,7 @@ contract Title is Auth, ERC721 {
 
     constructor (string memory name, string memory symbol) ERC721(name, symbol) {
         wards[msg.sender] = 1;
-        count = 1;  
+        count = 1;
     }
 
     // --- Title ---
@@ -34,7 +34,7 @@ interface TitleLike {
     function issue(address) external returns (uint);
     function close(uint) external;
     function ownerOf (uint) external view returns (address);
-    function count (uint) external view returns (uint);
+    function count () external view returns (uint);
 }
 
 contract TitleOwned {
