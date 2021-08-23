@@ -7,7 +7,6 @@ import { Auth } from "tinlake-auth/auth.sol";
 contract Title is Auth, ERC721 {
     // --- Data ---
     uint public count;
-    string public uri;
 
     constructor (string memory name, string memory symbol) ERC721(name, symbol) {
         wards[msg.sender] = 1;
